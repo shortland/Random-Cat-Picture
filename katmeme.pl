@@ -2,11 +2,11 @@
 
 use CGI;
 
-BEGIN 
+BEGIN
 {
-	$cgi = new CGI;
+    $cgi = new CGI;
 }
-
+STARTER:
 # random page
 $randomPage = (int(rand(137)) + 2);
 
@@ -30,8 +30,12 @@ for(0..$randomPic)
 ($useThis) = ($partitioned =~ /src=[^"]*"([^"]+)/);
 
 $useThis =~ s/thumbs\///g;
+if(($useThis =~ "") || (!defined $useThis))
+{
+    goto STARTER;
+}
 
 print $cgi->header(
-    -Location => "http://www.lolcats.com/".$useThis,
+-Location => "http://www.lolcats.com/".$useThis."?usethis=blank",
 );
 open(STDERR, ">&STDOUT");
