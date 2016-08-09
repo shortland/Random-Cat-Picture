@@ -35,7 +35,9 @@ if(($useThis =~ "") || (!defined $useThis))
     goto STARTER;
 }
 
-print $cgi->header(
--Location => "http://www.lolcats.com/".$useThis."?usethis=blank",
-);
+print $cgi->header(-type => "image");
+
+# directly print image rather than redirect
+print `curl -s "http://www.lolcats.com/$useThis"`;
+
 open(STDERR, ">&STDOUT");
