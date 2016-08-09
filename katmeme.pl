@@ -29,6 +29,8 @@ for(0..$randomPic)
 ($partitioned) = ($pageData =~ /[^Ω]*Ω([^∑]+)/);
 ($useThis) = ($partitioned =~ /src=[^"]*"([^"]+)/);
 
+$useThis =~ s/thumbs\///g;
+
 print $cgi->header(
     -Location => "http://www.lolcats.com/".$useThis,
 );
