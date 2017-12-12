@@ -28,7 +28,7 @@ sub random_kitty {
 	my $random_pic = int(rand(48));
 	my $url_use = $image_urls[$random_pic] =~ s/\/thumbs|"//gr;#/
 	if (!defined $url_use || $url_use eq "") {
-		return random_kitt(++$try);
+		return random_kitty(++$try);
 	}
 	my $img_data = request_curl("${base_url}${url_use}");
 	if (is502($img_data)) {
